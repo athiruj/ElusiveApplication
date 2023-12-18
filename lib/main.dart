@@ -7,14 +7,48 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: false,
+        //
+        // Look for TextTheme design in https://figma.fun/B4g5b5
+        //
+        fontFamily: "Poppins",
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            fontSize: 32,
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.w500,
+          ),
+          titleMedium: TextStyle(
+            fontSize: 24,
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.w500,
+          ),
+          titleSmall: TextStyle(
+            fontSize: 20,
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.w500,
+          ),
+          bodyLarge: TextStyle(
+            fontSize: 18,
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.w500,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 16,
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.w500,
+          ),
+          bodySmall: TextStyle(
+            fontSize: 14,
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
