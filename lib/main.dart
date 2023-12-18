@@ -11,6 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        useMaterial3: false,
+
         ///
         //? Look for ColorScheme in https://figma.fun/Ed3oB5
         ///
@@ -28,12 +30,53 @@ class MyApp extends StatelessWidget {
           onTertiary: Color(0xFF5B8900),
           onTertiaryContainer: Color(0xFF486B00),
         ),
-        useMaterial3: false,
 
         ///
         //? Look for TextTheme design in https://figma.fun/B4g5b5
         ///
         fontFamily: "Poppins",
+        //* "NotoSerif"
+        ///
+        primaryTextTheme: const TextTheme(
+          titleLarge: TextStyle(
+            fontSize: 32,
+            fontFamily: "NotoSerif",
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.36,
+          ),
+          titleMedium: TextStyle(
+            fontSize: 24,
+            fontFamily: "NotoSerif",
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.36,
+          ),
+          titleSmall: TextStyle(
+            fontSize: 20,
+            fontFamily: "NotoSerif",
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.36,
+          ),
+          bodyLarge: TextStyle(
+            fontSize: 18,
+            fontFamily: "NotoSerif",
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.36,
+          ),
+          bodyMedium: TextStyle(
+            fontSize: 16,
+            fontFamily: "NotoSerif",
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.36,
+          ),
+          bodySmall: TextStyle(
+            fontSize: 14,
+            fontFamily: "NotoSerif",
+            fontWeight: FontWeight.w500,
+            letterSpacing: 0.36,
+          ),
+        ),
+        //* "Poppins"
+        ///
         textTheme: const TextTheme(
           titleLarge: TextStyle(
             fontSize: 32,
