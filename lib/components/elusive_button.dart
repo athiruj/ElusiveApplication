@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 
 enum _ElusiveFilledButtonVariant { primary, red, yellow, green }
 
+///
+//? Look for ButtonTheme in https://figma.fun/au97LL
+///
+
 class ElusiveFilledButton extends ButtonStyleButton {
   const ElusiveFilledButton({
     super.key,
@@ -192,16 +196,7 @@ class ElusiveFilledButton extends ButtonStyleButton {
 
   @override
   ButtonStyle defaultStyleOf(BuildContext context) {
-    switch (_variant) {
-      case _ElusiveFilledButtonVariant.primary:
-        return _ElusivePrimaryButtonDefaults(context);
-      case _ElusiveFilledButtonVariant.red:
-        return _ElusiveRedButtonDefaults(context);
-      case _ElusiveFilledButtonVariant.yellow:
-        return _ElusiveYellowButtonDefaults(context);
-      case _ElusiveFilledButtonVariant.green:
-        return _ElusiveGreenButtonDefaults(context);
-    }
+    return _ElusivePrimaryButtonDefaults(context, _variant);
   }
 
   @override
@@ -376,11 +371,8 @@ EdgeInsetsGeometry _scaledPadding(BuildContext context) {
   );
 }
 
-///
-//? Primary Type
-///
 class _ElusivePrimaryButtonDefaults extends ButtonStyle {
-  _ElusivePrimaryButtonDefaults(this.context)
+  _ElusivePrimaryButtonDefaults(this.context, this.variant)
       : super(
           animationDuration: kThemeChangeDuration,
           enableFeedback: true,
@@ -388,6 +380,9 @@ class _ElusivePrimaryButtonDefaults extends ButtonStyle {
         );
 
   final BuildContext context;
+
+  final _ElusiveFilledButtonVariant variant;
+
   late final ColorScheme _colors = Theme.of(context).colorScheme;
 
   @override
@@ -399,34 +394,107 @@ class _ElusivePrimaryButtonDefaults extends ButtonStyle {
   MaterialStateProperty<Color?>? get backgroundColor =>
       MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return _colors.primaryContainer.withOpacity(0.46);
+          switch (variant) {
+            case _ElusiveFilledButtonVariant.primary:
+              return _colors.primaryContainer.withOpacity(0.42);
+            case _ElusiveFilledButtonVariant.red:
+              return _colors.primaryContainer.withOpacity(0.42);
+            case _ElusiveFilledButtonVariant.yellow:
+              return _colors.secondaryContainer.withOpacity(0.42);
+            case _ElusiveFilledButtonVariant.green:
+              return _colors.tertiaryContainer.withOpacity(0.42);
+          }
         }
         if (states.contains(MaterialState.focused)) {
-          return _colors.primaryContainer.withOpacity(0.56);
+          switch (variant) {
+            case _ElusiveFilledButtonVariant.primary:
+              return _colors.onPrimary;
+            case _ElusiveFilledButtonVariant.red:
+              return _colors.onPrimary;
+            case _ElusiveFilledButtonVariant.yellow:
+              return _colors.onSecondary;
+            case _ElusiveFilledButtonVariant.green:
+              return _colors.onTertiary;
+          }
         }
-        return _colors.primaryContainer;
+        switch (variant) {
+          case _ElusiveFilledButtonVariant.primary:
+            return _colors.primaryContainer;
+          case _ElusiveFilledButtonVariant.red:
+            return _colors.primaryContainer;
+          case _ElusiveFilledButtonVariant.yellow:
+            return _colors.secondaryContainer;
+          case _ElusiveFilledButtonVariant.green:
+            return _colors.tertiaryContainer;
+        }
       });
 
   @override
   MaterialStateProperty<Color?>? get foregroundColor =>
       MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          return _colors.secondary.withOpacity(0.42);
+          switch (variant) {
+            case _ElusiveFilledButtonVariant.primary:
+              return _colors.secondary.withOpacity(0.42);
+            case _ElusiveFilledButtonVariant.red:
+              return _colors.onPrimary.withOpacity(0.42);
+            case _ElusiveFilledButtonVariant.yellow:
+              return _colors.onSecondary.withOpacity(0.42);
+            case _ElusiveFilledButtonVariant.green:
+              return _colors.onTertiary.withOpacity(0.42);
+          }
         }
-        return _colors.secondary;
+        if (states.contains(MaterialState.focused)) {
+          switch (variant) {
+            case _ElusiveFilledButtonVariant.primary:
+              return _colors.secondary;
+            case _ElusiveFilledButtonVariant.red:
+              return _colors.onSurface;
+            case _ElusiveFilledButtonVariant.yellow:
+              return _colors.onSurface;
+            case _ElusiveFilledButtonVariant.green:
+              return _colors.onSurface;
+          }
+        }
+
+        switch (variant) {
+          case _ElusiveFilledButtonVariant.primary:
+            return _colors.secondary;
+          case _ElusiveFilledButtonVariant.red:
+            return _colors.onPrimaryContainer;
+          case _ElusiveFilledButtonVariant.yellow:
+            return _colors.onSecondaryContainer;
+          case _ElusiveFilledButtonVariant.green:
+            return _colors.onTertiaryContainer;
+        }
       });
 
   @override
   MaterialStateProperty<Color?>? get overlayColor =>
       MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.pressed)) {
-          return _colors.onPrimaryContainer.withOpacity(0.46);
+          switch (variant) {
+            case _ElusiveFilledButtonVariant.primary:
+              return _colors.onPrimaryContainer.withOpacity(0.12);
+            case _ElusiveFilledButtonVariant.red:
+              return _colors.onPrimaryContainer.withOpacity(0.12);
+            case _ElusiveFilledButtonVariant.yellow:
+              return _colors.onSecondaryContainer.withOpacity(0.12);
+            case _ElusiveFilledButtonVariant.green:
+              return _colors.onTertiaryContainer.withOpacity(0.12);
+          }
         }
         if (states.contains(MaterialState.hovered)) {
-          return _colors.onPrimaryContainer;
-        }
-        if (states.contains(MaterialState.focused)) {
-          return _colors.onPrimaryContainer.withOpacity(0.46);
+          switch (variant) {
+            case _ElusiveFilledButtonVariant.primary:
+              return _colors.onPrimaryContainer.withOpacity(0.8);
+            case _ElusiveFilledButtonVariant.red:
+              return _colors.onPrimaryContainer.withOpacity(0.8);
+            case _ElusiveFilledButtonVariant.yellow:
+              return _colors.onSecondaryContainer.withOpacity(0.8);
+            case _ElusiveFilledButtonVariant.green:
+              return _colors.onTertiaryContainer.withOpacity(0.8);
+          }
         }
         return null;
       });
@@ -446,397 +514,13 @@ class _ElusivePrimaryButtonDefaults extends ButtonStyle {
           return 0.0;
         }
         if (states.contains(MaterialState.pressed)) {
-          return 0.0;
+          return 1.0;
         }
         if (states.contains(MaterialState.hovered)) {
           return 1.0;
         }
         if (states.contains(MaterialState.focused)) {
-          return 1.0;
-        }
-        return 0.0;
-      });
-
-  @override
-  MaterialStateProperty<EdgeInsetsGeometry>? get padding =>
-      MaterialStatePropertyAll<EdgeInsetsGeometry>(_scaledPadding(context));
-
-  @override
-  MaterialStateProperty<Size>? get minimumSize =>
-      const MaterialStatePropertyAll<Size>(Size(60.0, 60.0));
-
-  // No default fixedSize
-
-  @override
-  MaterialStateProperty<Size>? get maximumSize =>
-      const MaterialStatePropertyAll<Size>(Size.infinite);
-
-  // No default side
-
-  @override
-  MaterialStateProperty<OutlinedBorder>? get shape =>
-      const MaterialStatePropertyAll<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(12.0),
-          ),
-        ),
-      );
-
-  @override
-  MaterialStateProperty<MouseCursor?>? get mouseCursor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return SystemMouseCursors.basic;
-        }
-        return SystemMouseCursors.click;
-      });
-
-  @override
-  VisualDensity? get visualDensity => Theme.of(context).visualDensity;
-
-  @override
-  MaterialTapTargetSize? get tapTargetSize =>
-      Theme.of(context).materialTapTargetSize;
-
-  @override
-  InteractiveInkFeatureFactory? get splashFactory =>
-      Theme.of(context).splashFactory;
-}
-
-///
-//? Red Type
-///
-class _ElusiveRedButtonDefaults extends ButtonStyle {
-  _ElusiveRedButtonDefaults(this.context)
-      : super(
-          animationDuration: kThemeChangeDuration,
-          enableFeedback: true,
-          alignment: Alignment.center,
-        );
-
-  final BuildContext context;
-  late final ColorScheme _colors = Theme.of(context).colorScheme;
-
-  @override
-  MaterialStateProperty<TextStyle?> get textStyle =>
-      MaterialStatePropertyAll<TextStyle?>(
-          Theme.of(context).textTheme.titleMedium);
-
-  @override
-  MaterialStateProperty<Color?>? get backgroundColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return _colors.primaryContainer.withOpacity(0.46);
-        }
-        if (states.contains(MaterialState.focused)) {
-          return _colors.primaryContainer.withOpacity(0.56);
-        }
-        return _colors.primaryContainer;
-      });
-
-  @override
-  MaterialStateProperty<Color?>? get foregroundColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return _colors.onPrimary.withOpacity(0.42);
-        }
-        return _colors.onPrimary;
-      });
-
-  @override
-  MaterialStateProperty<Color?>? get overlayColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.pressed)) {
-          return _colors.onPrimaryContainer.withOpacity(0.46);
-        }
-        if (states.contains(MaterialState.hovered)) {
-          return _colors.onPrimaryContainer;
-        }
-        if (states.contains(MaterialState.focused)) {
-          return _colors.onPrimaryContainer.withOpacity(0.46);
-        }
-        return null;
-      });
-
-  @override
-  MaterialStateProperty<Color>? get shadowColor =>
-      MaterialStatePropertyAll<Color>(_colors.shadow);
-
-  @override
-  MaterialStateProperty<Color>? get surfaceTintColor =>
-      const MaterialStatePropertyAll<Color>(Colors.transparent);
-
-  @override
-  MaterialStateProperty<double>? get elevation =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
           return 0.0;
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return 0.0;
-        }
-        if (states.contains(MaterialState.hovered)) {
-          return 1.0;
-        }
-        if (states.contains(MaterialState.focused)) {
-          return 1.0;
-        }
-        return 0.0;
-      });
-
-  @override
-  MaterialStateProperty<EdgeInsetsGeometry>? get padding =>
-      MaterialStatePropertyAll<EdgeInsetsGeometry>(_scaledPadding(context));
-
-  @override
-  MaterialStateProperty<Size>? get minimumSize =>
-      const MaterialStatePropertyAll<Size>(Size(60.0, 60.0));
-
-  // No default fixedSize
-
-  @override
-  MaterialStateProperty<Size>? get maximumSize =>
-      const MaterialStatePropertyAll<Size>(Size.infinite);
-
-  // No default side
-
-  @override
-  MaterialStateProperty<OutlinedBorder>? get shape =>
-      const MaterialStatePropertyAll<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(12.0),
-          ),
-        ),
-      );
-
-  @override
-  MaterialStateProperty<MouseCursor?>? get mouseCursor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return SystemMouseCursors.basic;
-        }
-        return SystemMouseCursors.click;
-      });
-
-  @override
-  VisualDensity? get visualDensity => Theme.of(context).visualDensity;
-
-  @override
-  MaterialTapTargetSize? get tapTargetSize =>
-      Theme.of(context).materialTapTargetSize;
-
-  @override
-  InteractiveInkFeatureFactory? get splashFactory =>
-      Theme.of(context).splashFactory;
-}
-
-///
-//? Yellow Type
-///
-class _ElusiveYellowButtonDefaults extends ButtonStyle {
-  _ElusiveYellowButtonDefaults(this.context)
-      : super(
-          animationDuration: kThemeChangeDuration,
-          enableFeedback: true,
-          alignment: Alignment.center,
-        );
-
-  final BuildContext context;
-  late final ColorScheme _colors = Theme.of(context).colorScheme;
-
-  @override
-  MaterialStateProperty<TextStyle?> get textStyle =>
-      MaterialStatePropertyAll<TextStyle?>(
-          Theme.of(context).textTheme.titleMedium);
-
-  @override
-  MaterialStateProperty<Color?>? get backgroundColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return _colors.secondaryContainer.withOpacity(0.46);
-        }
-        if (states.contains(MaterialState.focused)) {
-          return _colors.secondaryContainer.withOpacity(0.56);
-        }
-        return _colors.secondaryContainer;
-      });
-
-  @override
-  MaterialStateProperty<Color?>? get foregroundColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return _colors.onSecondary.withOpacity(0.42);
-        }
-        return _colors.onSecondary;
-      });
-
-  @override
-  MaterialStateProperty<Color?>? get overlayColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.pressed)) {
-          return _colors.onSecondaryContainer.withOpacity(0.46);
-        }
-        if (states.contains(MaterialState.hovered)) {
-          return _colors.onSecondaryContainer;
-        }
-        if (states.contains(MaterialState.focused)) {
-          return _colors.onSecondaryContainer.withOpacity(0.46);
-        }
-        return null;
-      });
-
-  @override
-  MaterialStateProperty<Color>? get shadowColor =>
-      MaterialStatePropertyAll<Color>(_colors.shadow);
-
-  @override
-  MaterialStateProperty<Color>? get surfaceTintColor =>
-      const MaterialStatePropertyAll<Color>(Colors.transparent);
-
-  @override
-  MaterialStateProperty<double>? get elevation =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return 0.0;
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return 0.0;
-        }
-        if (states.contains(MaterialState.hovered)) {
-          return 1.0;
-        }
-        if (states.contains(MaterialState.focused)) {
-          return 1.0;
-        }
-        return 0.0;
-      });
-
-  @override
-  MaterialStateProperty<EdgeInsetsGeometry>? get padding =>
-      MaterialStatePropertyAll<EdgeInsetsGeometry>(_scaledPadding(context));
-
-  @override
-  MaterialStateProperty<Size>? get minimumSize =>
-      const MaterialStatePropertyAll<Size>(Size(60.0, 60.0));
-
-  // No default fixedSize
-
-  @override
-  MaterialStateProperty<Size>? get maximumSize =>
-      const MaterialStatePropertyAll<Size>(Size.infinite);
-
-  // No default side
-
-  @override
-  MaterialStateProperty<OutlinedBorder>? get shape =>
-      const MaterialStatePropertyAll<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(12.0),
-          ),
-        ),
-      );
-
-  @override
-  MaterialStateProperty<MouseCursor?>? get mouseCursor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return SystemMouseCursors.basic;
-        }
-        return SystemMouseCursors.click;
-      });
-
-  @override
-  VisualDensity? get visualDensity => Theme.of(context).visualDensity;
-
-  @override
-  MaterialTapTargetSize? get tapTargetSize =>
-      Theme.of(context).materialTapTargetSize;
-
-  @override
-  InteractiveInkFeatureFactory? get splashFactory =>
-      Theme.of(context).splashFactory;
-}
-
-///
-//? Green Type
-///
-class _ElusiveGreenButtonDefaults extends ButtonStyle {
-  _ElusiveGreenButtonDefaults(this.context)
-      : super(
-          animationDuration: kThemeChangeDuration,
-          enableFeedback: true,
-          alignment: Alignment.center,
-        );
-
-  final BuildContext context;
-  late final ColorScheme _colors = Theme.of(context).colorScheme;
-
-  @override
-  MaterialStateProperty<TextStyle?> get textStyle =>
-      MaterialStatePropertyAll<TextStyle?>(
-          Theme.of(context).textTheme.titleMedium);
-
-  @override
-  MaterialStateProperty<Color?>? get backgroundColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return _colors.tertiaryContainer.withOpacity(0.46);
-        }
-        if (states.contains(MaterialState.focused)) {
-          return _colors.tertiaryContainer.withOpacity(0.56);
-        }
-        return _colors.tertiaryContainer;
-      });
-
-  @override
-  MaterialStateProperty<Color?>? get foregroundColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return _colors.onTertiary.withOpacity(0.42);
-        }
-        return _colors.onTertiary;
-      });
-
-  @override
-  MaterialStateProperty<Color?>? get overlayColor =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.pressed)) {
-          return _colors.onTertiaryContainer.withOpacity(0.46);
-        }
-        if (states.contains(MaterialState.hovered)) {
-          return _colors.onTertiaryContainer;
-        }
-        if (states.contains(MaterialState.focused)) {
-          return _colors.onTertiaryContainer.withOpacity(0.46);
-        }
-        return null;
-      });
-
-  @override
-  MaterialStateProperty<Color>? get shadowColor =>
-      MaterialStatePropertyAll<Color>(_colors.shadow);
-
-  @override
-  MaterialStateProperty<Color>? get surfaceTintColor =>
-      const MaterialStatePropertyAll<Color>(Colors.transparent);
-
-  @override
-  MaterialStateProperty<double>? get elevation =>
-      MaterialStateProperty.resolveWith((Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
-          return 0.0;
-        }
-        if (states.contains(MaterialState.pressed)) {
-          return 0.0;
-        }
-        if (states.contains(MaterialState.hovered)) {
-          return 1.0;
-        }
-        if (states.contains(MaterialState.focused)) {
-          return 1.0;
         }
         return 0.0;
       });

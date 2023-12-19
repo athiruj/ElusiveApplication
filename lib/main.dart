@@ -1,4 +1,4 @@
-import 'package:elusive_application/components/button.dart';
+import 'package:elusive_application/components/elusive_button.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,19 +18,19 @@ class MyApp extends StatelessWidget {
         //? Look for ColorScheme in https://figma.fun/Ed3oB5
         ///
         colorScheme: const ColorScheme.light(
-          primary: Color(0xFF951519),
-          primaryContainer: Color(0xFF851114),
-          onPrimary: Color(0xFF5A0D0F),
-          onPrimaryContainer: Color(0xFF370809),
-          secondary: Color(0xFFF1B326),
-          secondaryContainer: Color(0xFFE6A50F),
-          onSecondary: Color(0xFFC38B0D),
-          onSecondaryContainer: Color(0xFF9F720A),
-          tertiary: Color(0xFF76B100),
-          tertiaryContainer: Color(0xFF6DA300),
-          onTertiary: Color(0xFF5B8900),
-          onTertiaryContainer: Color(0xFF486B00),
-        ),
+            primary: Color(0xFF951519),
+            primaryContainer: Color(0xFF851114),
+            onPrimary: Color(0xFF5A0D0F),
+            onPrimaryContainer: Color(0xFF370809),
+            secondary: Color(0xFFF1B326),
+            secondaryContainer: Color(0xFFE6A50F),
+            onSecondary: Color(0xFFC38B0D),
+            onSecondaryContainer: Color(0xFF9F720A),
+            tertiary: Color(0xFF76B100),
+            tertiaryContainer: Color(0xFF6DA300),
+            onTertiary: Color(0xFF5B8900),
+            onTertiaryContainer: Color(0xFF486B00),
+            onSurface: Color(0xFFE9E9E9)),
 
         ///
         //? Look for TextTheme design in https://figma.fun/B4g5b5
@@ -138,40 +138,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool focus = false;
+  bool focus = true;
 
-  void focuser() {
-    setState(() {
-      focus = !focus;
-    });
-  }
+  void focuser() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.tertiary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // ElusiveFilledButton(
-            //   autofocus: !focus,
-            //   style: ElusiveFilledButton.styleFrom(
-            //     fixedSize: const Size(398, 60),
-            //   ),
-            //   onPressed: () => focuser(),
-            //   child: const Text("Enter"),
-            // ),
-            // const SizedBox(
-            //   height: 12.0,
-            // ),
             ElusiveFilledButton(
-              // autofocus: focus,
               style: ElusiveFilledButton.styleFrom(
                 fixedSize: const Size(398, 60),
               ),
               onPressed: () => focuser(),
-              child: const Text("Enter"),
+              child: const Text("Button"),
             ),
             ElusiveFilledButton.red(
               style: ElusiveFilledButton.styleFrom(
