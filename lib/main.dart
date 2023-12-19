@@ -1,3 +1,4 @@
+import 'package:elusive_application/components/button.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -109,6 +110,19 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
+
+        ///
+        //? Look for InputDecorationTheme in https://figma.fun/Xanh8e
+        ///
+        inputDecorationTheme: const InputDecorationTheme(),
+
+        ///
+        //? Look for ButtonTheme in https://figma.fun/au97LL
+        ///
+        buttonTheme: const ButtonThemeData(),
+        //* IconButton;
+        ///
+        iconButtonTheme: const IconButtonThemeData(),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -124,40 +138,103 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  bool focus = false;
 
-  void _incrementCounter() {
+  void focuser() {
     setState(() {
-      _counter++;
+      focus = !focus;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            // ElusiveFilledButton(
+            //   autofocus: !focus,
+            //   style: ElusiveFilledButton.styleFrom(
+            //     fixedSize: const Size(398, 60),
+            //   ),
+            //   onPressed: () => focuser(),
+            //   child: const Text("Enter"),
+            // ),
+            // const SizedBox(
+            //   height: 12.0,
+            // ),
+            ElusiveFilledButton(
+              // autofocus: focus,
+              style: ElusiveFilledButton.styleFrom(
+                fixedSize: const Size(398, 60),
+              ),
+              onPressed: () => focuser(),
+              child: const Text("Enter"),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            ElusiveFilledButton.red(
+              style: ElusiveFilledButton.styleFrom(
+                fixedSize: const Size(398, 60),
+              ),
+              onPressed: () => focuser(),
+              child: const Text("Enter"),
+            ),
+            ElusiveFilledButton.yellow(
+              style: ElusiveFilledButton.styleFrom(
+                fixedSize: const Size(398, 60),
+              ),
+              onPressed: () => focuser(),
+              child: const Text("Enter"),
+            ),
+            ElusiveFilledButton.green(
+              style: ElusiveFilledButton.styleFrom(
+                fixedSize: const Size(398, 60),
+              ),
+              onPressed: () => focuser(),
+              child: const Text("Enter"),
+            ),
+            ElusiveFilledButton.icon(
+              icon: const Icon(Icons.abc, size: 36.0),
+              style: ElusiveFilledButton.styleFrom(
+                fixedSize: const Size(398, 60),
+              ),
+              onPressed: () => focuser(),
+              label: const Text("Enter"),
+            ),
+            ElusiveFilledButton.redIcon(
+              icon: const Icon(Icons.abc, size: 36.0),
+              style: ElusiveFilledButton.styleFrom(
+                fixedSize: const Size(398, 60),
+              ),
+              onPressed: () => focuser(),
+              label: const Text("Enter"),
+            ),
+            ElusiveFilledButton.yellowIcon(
+              icon: const Icon(Icons.abc, size: 36.0),
+              style: ElusiveFilledButton.styleFrom(
+                fixedSize: const Size(398, 60),
+              ),
+              onPressed: () => focuser(),
+              label: const Text("Enter"),
+            ),
+            ElusiveFilledButton.greenIcon(
+              icon: const Icon(Icons.abc, size: 36.0),
+              style: ElusiveFilledButton.styleFrom(
+                fixedSize: const Size(398, 60),
+              ),
+              onPressed: () => focuser(),
+              label: const Text("Enter"),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
     );
   }
 }
+// 
