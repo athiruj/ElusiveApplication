@@ -1,4 +1,7 @@
 import 'package:elusive_application/components/elusive_button.dart';
+import 'package:elusive_application/components/elusive_text_form_field.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
 
         ///
-        //? Look for ColorScheme in https://figma.fun/Ed3oB5
+        //? Look for ColorScheme in `https://figma.fun/Ed3oB5`
         ///
         colorScheme: const ColorScheme.light(
             primary: Color(0xFF951519),
@@ -33,7 +36,7 @@ class MyApp extends StatelessWidget {
             onSurface: Color(0xFFE9E9E9)),
 
         ///
-        //? Look for TextTheme design in https://figma.fun/B4g5b5
+        //? Look for TextTheme design in `https://figma.fun/B4g5b5`
         ///
         fontFamily: "Poppins",
         //* "NotoSerif"
@@ -85,9 +88,9 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
           titleMedium: TextStyle(
-            fontSize: 24,
+            fontSize: 20,
             fontFamily: "Poppins",
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w400,
           ),
           titleSmall: TextStyle(
             fontSize: 20,
@@ -111,18 +114,30 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        ///
-        //? Look for InputDecorationTheme in https://figma.fun/Xanh8e
-        ///
-        inputDecorationTheme: const InputDecorationTheme(),
+        textSelectionTheme:
+            const TextSelectionThemeData(cursorColor: Colors.white),
 
         ///
-        //? Look for ButtonTheme in https://figma.fun/au97LL
+        //? Look for InputDecorationTheme in `https://figma.fun/Xanh8e`
         ///
-        buttonTheme: const ButtonThemeData(),
-        //* IconButton;
-        ///
+        inputDecorationTheme: const InputDecorationTheme(
+          filled: true,
+          fillColor: Color(0xFF851114),
+          contentPadding: EdgeInsets.all(16.0),
+          suffixStyle: TextStyle(
+            fontSize: 20,
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.w400,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12.0),
+            ),
+          ),
+        ),
+
         iconButtonTheme: const IconButtonThemeData(),
+        iconTheme: const IconThemeData(size: 36.0),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -146,20 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElusiveFilledButton.icon(
-              style: ElusiveFilledButton.styleFrom(
-                fixedSize: const Size(398, 60),
-              ),
-              type: ElusiveFilledButtonType.yellow,
-              onPressed: () => focuser(),
-              icon: const Icon(Icons.abc),
-              label: const Text("Button"),
-            ),
-          ],
+          children: <Widget>[],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -170,4 +175,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-// 
+//
