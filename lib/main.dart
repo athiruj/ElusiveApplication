@@ -1,5 +1,4 @@
-import 'package:elusive_application/components/elusive_button.dart';
-import 'package:elusive_application/components/elusive_text_form_field.dart';
+import 'package:elusive_application/components/elusive_input_decoration.dart';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -159,12 +158,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    EInputDecoration inputDecoration = EInputDecoration(context);
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+          children: <Widget>[
+            TextField(
+              decoration: inputDecoration,
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
