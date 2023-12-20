@@ -145,70 +145,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.tertiary,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElusiveFilledButton(
-              style: ElusiveFilledButton.styleFrom(
-                fixedSize: const Size(398, 60),
-              ),
-              onPressed: () => focuser(),
-              child: const Text("Button"),
-            ),
-            ElusiveFilledButton.red(
-              style: ElusiveFilledButton.styleFrom(
-                fixedSize: const Size(398, 60),
-              ),
-              onPressed: () => focuser(),
-              child: const Text("Enter"),
-            ),
-            ElusiveFilledButton.yellow(
-              style: ElusiveFilledButton.styleFrom(
-                fixedSize: const Size(398, 60),
-              ),
-              onPressed: () => focuser(),
-              child: const Text("Enter"),
-            ),
-            ElusiveFilledButton.green(
-              style: ElusiveFilledButton.styleFrom(
-                fixedSize: const Size(398, 60),
-              ),
-              onPressed: () => focuser(),
-              child: const Text("Enter"),
-            ),
             ElusiveFilledButton.icon(
-              icon: const Icon(Icons.abc, size: 36.0),
               style: ElusiveFilledButton.styleFrom(
                 fixedSize: const Size(398, 60),
               ),
+              type: ElusiveFilledButtonType.yellow,
               onPressed: () => focuser(),
-              label: const Text("Enter"),
-            ),
-            ElusiveFilledButton.redIcon(
-              icon: const Icon(Icons.abc, size: 36.0),
-              style: ElusiveFilledButton.styleFrom(
-                fixedSize: const Size(398, 60),
-              ),
-              onPressed: () => focuser(),
-              label: const Text("Enter"),
-            ),
-            ElusiveFilledButton.yellowIcon(
-              icon: const Icon(Icons.abc, size: 36.0),
-              style: ElusiveFilledButton.styleFrom(
-                fixedSize: const Size(398, 60),
-              ),
-              onPressed: () => focuser(),
-              label: const Text("Enter"),
-            ),
-            ElusiveFilledButton.greenIcon(
-              icon: const Icon(Icons.abc, size: 36.0),
-              style: ElusiveFilledButton.styleFrom(
-                fixedSize: const Size(398, 60),
-              ),
-              onPressed: () => focuser(),
-              label: const Text("Enter"),
+              icon: const Icon(Icons.abc),
+              label: const Text("Button"),
             ),
           ],
         ),

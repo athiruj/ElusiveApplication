@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-enum _ElusiveFilledButtonVariant { primary, red, yellow, green }
+enum ElusiveFilledButtonType { primary, red, yellow, green }
 
 ///
 //? Look for ButtonTheme in https://figma.fun/au97LL
@@ -13,6 +13,7 @@ class ElusiveFilledButton extends ButtonStyleButton {
   const ElusiveFilledButton({
     super.key,
     required super.onPressed,
+    this.type = ElusiveFilledButtonType.primary,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -22,7 +23,7 @@ class ElusiveFilledButton extends ButtonStyleButton {
     super.clipBehavior = Clip.none,
     super.statesController,
     required super.child,
-  }) : _variant = _ElusiveFilledButtonVariant.primary;
+  });
 
   const ElusiveFilledButton.red({
     super.key,
@@ -36,7 +37,7 @@ class ElusiveFilledButton extends ButtonStyleButton {
     super.clipBehavior = Clip.none,
     super.statesController,
     required super.child,
-  }) : _variant = _ElusiveFilledButtonVariant.red;
+  }) : type = ElusiveFilledButtonType.red;
 
   const ElusiveFilledButton.yellow({
     super.key,
@@ -50,7 +51,7 @@ class ElusiveFilledButton extends ButtonStyleButton {
     super.clipBehavior = Clip.none,
     super.statesController,
     required super.child,
-  }) : _variant = _ElusiveFilledButtonVariant.yellow;
+  }) : type = ElusiveFilledButtonType.yellow;
 
   const ElusiveFilledButton.green({
     super.key,
@@ -64,10 +65,11 @@ class ElusiveFilledButton extends ButtonStyleButton {
     super.clipBehavior = Clip.none,
     super.statesController,
     required super.child,
-  }) : _variant = _ElusiveFilledButtonVariant.green;
+  }) : type = ElusiveFilledButtonType.green;
 
   factory ElusiveFilledButton.icon({
     Key? key,
+    ElusiveFilledButtonType? type,
     required VoidCallback? onPressed,
     VoidCallback? onLongPress,
     ValueChanged<bool>? onHover,
@@ -192,11 +194,11 @@ class ElusiveFilledButton extends ButtonStyleButton {
     );
   }
 
-  final _ElusiveFilledButtonVariant _variant;
+  final ElusiveFilledButtonType? type;
 
   @override
   ButtonStyle defaultStyleOf(BuildContext context) {
-    return _ElusivePrimaryButtonDefaults(context, _variant);
+    return _ElusivePrimaryButtonDefaults(context, type!);
   }
 
   @override
@@ -209,6 +211,7 @@ class _ElusiveFilledButtonWithIcon extends ElusiveFilledButton {
   _ElusiveFilledButtonWithIcon({
     super.key,
     required super.onPressed,
+    ElusiveFilledButtonType? type,
     super.onLongPress,
     super.onHover,
     super.onFocusChange,
@@ -220,6 +223,7 @@ class _ElusiveFilledButtonWithIcon extends ElusiveFilledButton {
     required Widget icon,
     required Widget label,
   }) : super(
+            type: type,
             autofocus: autofocus ?? false,
             clipBehavior: clipBehavior ?? Clip.none,
             child: _ElusiveFilledButtonWithIconChild(icon: icon, label: label));
@@ -372,7 +376,7 @@ EdgeInsetsGeometry _scaledPadding(BuildContext context) {
 }
 
 class _ElusivePrimaryButtonDefaults extends ButtonStyle {
-  _ElusivePrimaryButtonDefaults(this.context, this.variant)
+  _ElusivePrimaryButtonDefaults(this.context, this.type)
       : super(
           animationDuration: kThemeChangeDuration,
           enableFeedback: true,
@@ -381,7 +385,7 @@ class _ElusivePrimaryButtonDefaults extends ButtonStyle {
 
   final BuildContext context;
 
-  final _ElusiveFilledButtonVariant variant;
+  final ElusiveFilledButtonType type;
 
   late final ColorScheme _colors = Theme.of(context).colorScheme;
 
@@ -394,37 +398,37 @@ class _ElusivePrimaryButtonDefaults extends ButtonStyle {
   MaterialStateProperty<Color?>? get backgroundColor =>
       MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          switch (variant) {
-            case _ElusiveFilledButtonVariant.primary:
+          switch (type) {
+            case ElusiveFilledButtonType.primary:
               return _colors.primaryContainer.withOpacity(0.42);
-            case _ElusiveFilledButtonVariant.red:
+            case ElusiveFilledButtonType.red:
               return _colors.primaryContainer.withOpacity(0.42);
-            case _ElusiveFilledButtonVariant.yellow:
+            case ElusiveFilledButtonType.yellow:
               return _colors.secondaryContainer.withOpacity(0.42);
-            case _ElusiveFilledButtonVariant.green:
+            case ElusiveFilledButtonType.green:
               return _colors.tertiaryContainer.withOpacity(0.42);
           }
         }
         if (states.contains(MaterialState.focused)) {
-          switch (variant) {
-            case _ElusiveFilledButtonVariant.primary:
+          switch (type) {
+            case ElusiveFilledButtonType.primary:
               return _colors.onPrimary;
-            case _ElusiveFilledButtonVariant.red:
+            case ElusiveFilledButtonType.red:
               return _colors.onPrimary;
-            case _ElusiveFilledButtonVariant.yellow:
+            case ElusiveFilledButtonType.yellow:
               return _colors.onSecondary;
-            case _ElusiveFilledButtonVariant.green:
+            case ElusiveFilledButtonType.green:
               return _colors.onTertiary;
           }
         }
-        switch (variant) {
-          case _ElusiveFilledButtonVariant.primary:
+        switch (type) {
+          case ElusiveFilledButtonType.primary:
             return _colors.primaryContainer;
-          case _ElusiveFilledButtonVariant.red:
+          case ElusiveFilledButtonType.red:
             return _colors.primaryContainer;
-          case _ElusiveFilledButtonVariant.yellow:
+          case ElusiveFilledButtonType.yellow:
             return _colors.secondaryContainer;
-          case _ElusiveFilledButtonVariant.green:
+          case ElusiveFilledButtonType.green:
             return _colors.tertiaryContainer;
         }
       });
@@ -433,38 +437,38 @@ class _ElusivePrimaryButtonDefaults extends ButtonStyle {
   MaterialStateProperty<Color?>? get foregroundColor =>
       MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.disabled)) {
-          switch (variant) {
-            case _ElusiveFilledButtonVariant.primary:
+          switch (type) {
+            case ElusiveFilledButtonType.primary:
               return _colors.secondary.withOpacity(0.42);
-            case _ElusiveFilledButtonVariant.red:
+            case ElusiveFilledButtonType.red:
               return _colors.onPrimary.withOpacity(0.42);
-            case _ElusiveFilledButtonVariant.yellow:
+            case ElusiveFilledButtonType.yellow:
               return _colors.onSecondary.withOpacity(0.42);
-            case _ElusiveFilledButtonVariant.green:
+            case ElusiveFilledButtonType.green:
               return _colors.onTertiary.withOpacity(0.42);
           }
         }
         if (states.contains(MaterialState.focused)) {
-          switch (variant) {
-            case _ElusiveFilledButtonVariant.primary:
+          switch (type) {
+            case ElusiveFilledButtonType.primary:
               return _colors.secondary;
-            case _ElusiveFilledButtonVariant.red:
+            case ElusiveFilledButtonType.red:
               return _colors.onSurface;
-            case _ElusiveFilledButtonVariant.yellow:
+            case ElusiveFilledButtonType.yellow:
               return _colors.onSurface;
-            case _ElusiveFilledButtonVariant.green:
+            case ElusiveFilledButtonType.green:
               return _colors.onSurface;
           }
         }
 
-        switch (variant) {
-          case _ElusiveFilledButtonVariant.primary:
+        switch (type) {
+          case ElusiveFilledButtonType.primary:
             return _colors.secondary;
-          case _ElusiveFilledButtonVariant.red:
+          case ElusiveFilledButtonType.red:
             return _colors.onPrimaryContainer;
-          case _ElusiveFilledButtonVariant.yellow:
+          case ElusiveFilledButtonType.yellow:
             return _colors.onSecondaryContainer;
-          case _ElusiveFilledButtonVariant.green:
+          case ElusiveFilledButtonType.green:
             return _colors.onTertiaryContainer;
         }
       });
@@ -473,26 +477,26 @@ class _ElusivePrimaryButtonDefaults extends ButtonStyle {
   MaterialStateProperty<Color?>? get overlayColor =>
       MaterialStateProperty.resolveWith((Set<MaterialState> states) {
         if (states.contains(MaterialState.pressed)) {
-          switch (variant) {
-            case _ElusiveFilledButtonVariant.primary:
+          switch (type) {
+            case ElusiveFilledButtonType.primary:
               return _colors.onPrimaryContainer.withOpacity(0.12);
-            case _ElusiveFilledButtonVariant.red:
+            case ElusiveFilledButtonType.red:
               return _colors.onPrimaryContainer.withOpacity(0.12);
-            case _ElusiveFilledButtonVariant.yellow:
+            case ElusiveFilledButtonType.yellow:
               return _colors.onSecondaryContainer.withOpacity(0.12);
-            case _ElusiveFilledButtonVariant.green:
+            case ElusiveFilledButtonType.green:
               return _colors.onTertiaryContainer.withOpacity(0.12);
           }
         }
         if (states.contains(MaterialState.hovered)) {
-          switch (variant) {
-            case _ElusiveFilledButtonVariant.primary:
+          switch (type) {
+            case ElusiveFilledButtonType.primary:
               return _colors.onPrimaryContainer.withOpacity(0.8);
-            case _ElusiveFilledButtonVariant.red:
+            case ElusiveFilledButtonType.red:
               return _colors.onPrimaryContainer.withOpacity(0.8);
-            case _ElusiveFilledButtonVariant.yellow:
+            case ElusiveFilledButtonType.yellow:
               return _colors.onSecondaryContainer.withOpacity(0.8);
-            case _ElusiveFilledButtonVariant.green:
+            case ElusiveFilledButtonType.green:
               return _colors.onTertiaryContainer.withOpacity(0.8);
           }
         }
