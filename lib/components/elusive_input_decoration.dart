@@ -1,6 +1,9 @@
 import 'package:elusive_application/components/elusive_types.dart';
 import 'package:flutter/material.dart';
 
+///
+//? Look for InputDecorationTheme in `https://figma.fun/Xanh8e`
+///
 class EInputDecoration extends InputDecoration {
   const EInputDecoration(
     this.context, {
@@ -90,7 +93,7 @@ class EInputDecoration extends InputDecoration {
             fontSize: 20,
             fontFamily: "Poppins",
             fontWeight: FontWeight.w400,
-            color: _foregroundColor(context, type));
+            color: _foregroundColor(context, type).withOpacity(0.5));
 
     contentPadding = contentPadding ?? const EdgeInsets.all(16.0);
     prefixStyle = prefixStyle ??
@@ -108,8 +111,21 @@ class EInputDecoration extends InputDecoration {
             color: _foregroundColor(context, type));
     suffixIconColor = suffixIconColor ?? _foregroundColor(context, type);
     fillColor = fillColor ?? _bakgroundColor(context, type);
+    focusedBorder = focusedBorder ??
+        OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2.0, color: _foregroundColor(context, type)),
+          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+        );
+    enabledBorder = enabledBorder ??
+        OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 2.0, color: _outlineColor(context, type)),
+          borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+        );
     border = border ??
         const OutlineInputBorder(
+            borderSide: BorderSide.none,
             borderRadius: BorderRadius.all(Radius.circular(12.0)));
     return EInputDecoration(
       context,
@@ -126,7 +142,7 @@ class EInputDecoration extends InputDecoration {
       prefix: prefix,
       prefixText: prefixText,
       prefixStyle: prefixStyle,
-      suffixText: suffixText,
+      suffixText: " $suffixText",
       suffixStyle: suffixStyle,
       suffixIconColor: suffixIconColor,
       suffixIconConstraints: suffixIconConstraints,
@@ -172,11 +188,25 @@ class EInputDecoration extends InputDecoration {
       case ElusiveType.primary:
         return colors.onSecondary;
       case ElusiveType.red:
-        return colors.onPrimary;
+        return colors.onPrimaryContainer;
       case ElusiveType.yellow:
-        return colors.onSecondary;
+        return colors.onSecondaryContainer;
       case ElusiveType.green:
-        return colors.onTertiary;
+        return colors.onTertiaryContainer;
+    }
+  }
+
+  static Color _outlineColor(BuildContext context, ElusiveType type) {
+    late final ColorScheme colors = Theme.of(context).colorScheme;
+    switch (type) {
+      case ElusiveType.primary:
+        return colors.onPrimary;
+      case ElusiveType.red:
+        return colors.onPrimary.withOpacity(0.5);
+      case ElusiveType.yellow:
+        return colors.onSecondary.withOpacity(0.5);
+      case ElusiveType.green:
+        return colors.onTertiary.withOpacity(0.5);
     }
   }
 

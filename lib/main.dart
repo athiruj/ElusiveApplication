@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
           titleMedium: TextStyle(
             fontSize: 20,
             fontFamily: "Poppins",
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w500,
             color: Color(0xFFE9E9E9),
           ),
           titleSmall: TextStyle(
@@ -120,25 +120,6 @@ class MyApp extends StatelessWidget {
         textSelectionTheme:
             const TextSelectionThemeData(cursorColor: Colors.white),
 
-        ///
-        //? Look for InputDecorationTheme in `https://figma.fun/Xanh8e`
-        ///
-        // inputDecorationTheme: const InputDecorationTheme(
-        //   filled: true,
-        //   fillColor: Color(0xFF851114),
-        //   contentPadding: EdgeInsets.all(16.0),
-        //   suffixStyle: TextStyle(
-        //     fontSize: 20,
-        //     fontFamily: "Poppins",
-        //     fontWeight: FontWeight.w400,
-        //   ),
-        //   border: OutlineInputBorder(
-        //     borderRadius: BorderRadius.all(
-        //       Radius.circular(12.0),
-        //     ),
-        //   ),
-        // ),
-
         iconButtonTheme: const IconButtonThemeData(),
         iconTheme: const IconThemeData(size: 36.0),
       ),
@@ -162,9 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // EInputDecoration inputDecoration = EInputDecoration(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
