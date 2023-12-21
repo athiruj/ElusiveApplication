@@ -1,5 +1,6 @@
 import 'package:elusive_application/components/elusive_input_decoration.dart';
-import 'dart:ui';
+import 'package:elusive_application/components/elusive_types.dart';
+// import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -86,10 +87,13 @@ class MyApp extends StatelessWidget {
             fontFamily: "Poppins",
             fontWeight: FontWeight.w500,
           ),
+
+          /// TextInputField Style
           titleMedium: TextStyle(
             fontSize: 20,
             fontFamily: "Poppins",
             fontWeight: FontWeight.w400,
+            color: Color(0xFFE9E9E9),
           ),
           titleSmall: TextStyle(
             fontSize: 20,
@@ -119,21 +123,21 @@ class MyApp extends StatelessWidget {
         ///
         //? Look for InputDecorationTheme in `https://figma.fun/Xanh8e`
         ///
-        inputDecorationTheme: const InputDecorationTheme(
-          filled: true,
-          fillColor: Color(0xFF851114),
-          contentPadding: EdgeInsets.all(16.0),
-          suffixStyle: TextStyle(
-            fontSize: 20,
-            fontFamily: "Poppins",
-            fontWeight: FontWeight.w400,
-          ),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(12.0),
-            ),
-          ),
-        ),
+        // inputDecorationTheme: const InputDecorationTheme(
+        //   filled: true,
+        //   fillColor: Color(0xFF851114),
+        //   contentPadding: EdgeInsets.all(16.0),
+        //   suffixStyle: TextStyle(
+        //     fontSize: 20,
+        //     fontFamily: "Poppins",
+        //     fontWeight: FontWeight.w400,
+        //   ),
+        //   border: OutlineInputBorder(
+        //     borderRadius: BorderRadius.all(
+        //       Radius.circular(12.0),
+        //     ),
+        //   ),
+        // ),
 
         iconButtonTheme: const IconButtonThemeData(),
         iconTheme: const IconThemeData(size: 36.0),
@@ -158,8 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    EInputDecoration inputDecoration = EInputDecoration(context);
-
+    // EInputDecoration inputDecoration = EInputDecoration(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: Center(
@@ -167,7 +170,36 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
-              decoration: inputDecoration,
+              decoration: EInputDecoration.decotation(
+                context,
+                type: ElusiveType.primary,
+                hintText: "SSID",
+                suffixText: "hello",
+              ),
+            ),
+            TextField(
+              decoration: EInputDecoration.decotation(
+                context,
+                type: ElusiveType.red,
+                hintText: "SSID",
+                suffixText: "hello",
+              ),
+            ),
+            TextField(
+              decoration: EInputDecoration.decotation(
+                context,
+                type: ElusiveType.yellow,
+                hintText: "SSID",
+                suffixText: "hello",
+              ),
+            ),
+            TextField(
+              decoration: EInputDecoration.decotation(
+                context,
+                type: ElusiveType.green,
+                hintText: "SSID",
+                suffixText: "hello",
+              ),
             ),
           ],
         ),
