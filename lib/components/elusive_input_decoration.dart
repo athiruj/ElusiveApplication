@@ -202,11 +202,11 @@ class EInputDecoration extends InputDecoration {
       case ElusiveType.primary:
         return colors.onPrimary;
       case ElusiveType.red:
-        return colors.onPrimary.withOpacity(0.5);
+        return colors.onPrimary.withOpacity(0.3);
       case ElusiveType.yellow:
-        return colors.onSecondary.withOpacity(0.5);
+        return colors.onSecondary.withOpacity(0.3);
       case ElusiveType.green:
-        return colors.onTertiary.withOpacity(0.5);
+        return colors.onTertiary.withOpacity(0.3);
     }
   }
 

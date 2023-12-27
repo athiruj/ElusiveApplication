@@ -1,13 +1,6 @@
-// import 'package:eluRsive_application/components/elusive_input_decoration.dart';
-// import 'package:elusive_application/components/elusive_types.dart';
-// import 'dart:ui';
-
-import 'package:elusive_application/components/elusive_types.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-import 'components/elusive_button.dart';
-import 'pages/beginning/beginning_page.dart';
+import 'pages/beginning/beginning.dart';
 
 void main() {
   runApp(const MyApp());
@@ -148,94 +141,8 @@ class MyApp extends StatelessWidget {
               // Tablet Size
             }
             // Mobile Size
-            return const MyWidget();
+            return const BeginningPage();
           },
         ));
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-  void scale(BuildContext context) {
-    List<double> grid = ColumnGrid(context,
-            column: 6,
-            gutter: 16.0,
-            margin: const EdgeInsets.all(16.0),
-            safeArea: true)
-        .startOrigin();
-    print(grid);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    ColorScheme color = Theme.of(context).colorScheme;
-    ColumnGrid columnGrid = ColumnGrid(context,
-        column: 6,
-        gutter: 16.0,
-        margin: const EdgeInsets.all(16.0),
-        safeArea: true);
-    List<double> grid = columnGrid.startOrigin();
-    return Scaffold(
-      backgroundColor: color.primary,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Stack(
-            children: [
-              Positioned(
-                top: grid[0],
-                child: Container(
-                  color: Colors.amber,
-                  height: columnGrid.boxArea,
-                  width: 100,
-                ),
-              ),
-              Positioned(
-                top: grid[1],
-                child: Container(
-                  color: Colors.amber,
-                  height: columnGrid.boxArea,
-                  width: 100,
-                ),
-              ),
-              Positioned(
-                top: grid[2],
-                child: ElusiveFilledButton(
-                  style: ElusiveFilledButton.styleFrom(
-                      minimumSize: const Size(300, 56)),
-                  onPressed: () => scale(context),
-                  type: ElusiveType.primary,
-                  child: const Text('Get Size'),
-                ),
-              ),
-              Positioned(
-                top: grid[3],
-                child: Container(
-                  color: Colors.amber,
-                  height: columnGrid.boxArea,
-                  width: 100,
-                ),
-              ),
-              Positioned(
-                top: grid[4],
-                child: Container(
-                  color: Colors.amber,
-                  height: columnGrid.boxArea,
-                  width: 100,
-                ),
-              ),
-              Positioned(
-                top: grid[5],
-                child: Container(
-                  color: Colors.amber,
-                  height: columnGrid.boxArea,
-                  width: 100,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }
